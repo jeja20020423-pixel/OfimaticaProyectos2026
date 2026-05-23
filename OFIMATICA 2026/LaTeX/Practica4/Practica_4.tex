@@ -1,0 +1,82 @@
+\documentclass[12pt]{article}
+
+%Importamos paquetes
+\usepackage[utf8]{inputenc}  %Configura caracteres especiales
+\usepackage[spanish]{babel}  %Configura en español los valores predetermina
+\usepackage{amsmath}   %Para el manejo de formulas
+\usepackage{array}  %Mejor manejo de tablas
+\usepackage{geometry} %Margenes
+
+\newgeometry{margin=2.5cm} %Modifica el margen de la hoja
+
+\newcommand{\minombre}{Jesús Aguilar}
+\newcommand{\nombrepractica}{Práctica 4: tablas , entornos y comandos}
+\newcommand{\universidad}{UASLP-FEPZM}
+
+
+
+
+\newenvironment{ejercicio}
+{
+   \vspace{0.3cm}
+   \noindent\textbf{Ejercicio:}
+   \begin{itshape}  %Modifica a italica el texto
+
+}
+{
+\end{itshape}
+\vspace{0.3cm}
+}
+\begin{document}
+\begin{center}
+\vspace*{4cm}
+{\LARGE \nombrepractica \LaTeX}\\[0.5cm]
+\vspace{2.5cm}
+{\large \minombre}\\[0.5cm]
+\vspace{2.5cm}
+{\large \today}
+\end{center}
+
+\section{Intrdducción}
+En esta practica aprenderemos a crear tablas y a usar \textbf{enviroments}, inclueyndo enviroments personalizados
+
+\section{Uso de tablas}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{c|c|c}
+         %\hline
+         Alumno&Materia&Calificacion\\
+         \hline
+         Pedro&MTeologia&8\\
+         Delfina&Biologia&7
+    \end{tabular}{}
+    \caption{Calificaciones de alumnos}
+    \label{tab:calificaciones}
+
+\end{table}
+
+\subsection{Tablas con columnas combinadas}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{c|c|c}
+         \hline
+         \multicolumn{3}{|c|}{Horario}\\ \hline
+         Dia&Hora&Materia \\ \hline
+         Lunes&10-11&Matematicas \\ \hline
+         Martes&11-12&fISICA \\ \hline
+    \end{tabular}
+    \caption{Horario semanal}
+    \label{tab:Horario}
+\end{table}
+\section{Enviroment perosnalizado}
+Ahora usaremos nuestro enviroment \textbf{ejercicio}
+
+\begin{ejercicio}
+    Crear una tabla con al menos 4
+    
+\end{ejercicio}
+
+
+\end{document}
+

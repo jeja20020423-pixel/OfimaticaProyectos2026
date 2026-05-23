@@ -1,0 +1,71 @@
+\documentclass[12pt]{article}
+
+% Importamos paquetes básicos basados en tu Práctica 4
+\usepackage[utf8]{inputenc}  % Configura caracteres especiales 
+\usepackage[spanish]{babel}  % Configura en español los valores predeterminados 
+\usepackage{amsmath}         % Para el manejo de formulas 
+\usepackage{array}           % Mejor manejo de tablas 
+\usepackage{geometry}        % Margenes 
+
+% Configuración de márgenes horizontales (Landscape) bien proporcionados
+\geometry{
+    landscape,
+    letterpaper,
+    margin=2cm
+}
+
+% Macro para simplificar el centrado de texto en columnas con ancho fijo
+\newcolumntype{C}[1]{>{\centering\arraybackslash}m{#1}}
+
+\newcommand{\minombre}{Jesús Emilio Jiménez Aguilar}
+\newcommand{\nombrepractica}{Horario Escolar Actual}
+\newcommand{\universidad}{UASLP - Facultad de Estudios Profesionales Zona Media}
+
+\begin{document}
+
+\begin{center}
+    {\Large \textbf{\universidad}} \\[0.2cm]
+    {\large \textbf{\nombrepractica}} \\[0.1cm]
+    {\small \textbf{Alumno:} \minombre \quad | \quad \textbf{Carrera:} Ingeniería Mecatrónica \quad | \quad \textbf{Fecha:} \today}
+\end{center}
+
+\vspace{0.4cm}
+
+\noindent
+\begin{table}[h]
+    \centering
+    % Total de ancho de tabla = 3.5cm + (4.0cm * 5) = 23.5cm (Entra perfecto sin cortarse)
+    \begin{tabular}{|C{3.5cm}|C{4.0cm}|C{4.0cm}|C{4.0cm}|C{4.0cm}|C{4.0cm}|}
+        \hline
+        \textbf{HORARIO} & \textbf{LUNES} & \textbf{MARTES} & \textbf{MIÉRCOLES} & \textbf{JUEVES} & \textbf{VIERNES} \\ \hline
+        
+        % 06:00 AM a 07:00 AM
+        \textbf{06:00 AM a 07:00 AM} & & Dibujo en Ingeniería & Dibujo en Ingeniería & Dibujo en Ingeniería & Dibujo en Ingeniería \\ \hline
+        
+        % 07:00 AM a 08:00 AM
+        \textbf{07:00 AM a 08:00 AM} & & \multicolumn{2}{c|}{Habilidades SocAft} & Habilidades SocAft & \\ \hline
+        
+        % 08:00 AM a 09:00 AM
+        \textbf{08:00 AM a 09:00 AM} & & & & & \\ \hline
+        
+        % 09:00 AM a 10:00 AM
+        \textbf{09:00 AM a 10:00 AM} & & & & & \\ \hline
+        
+        % 10:00 AM a 11:00 AM
+        \textbf{10:00 AM a 11:00 AM} & Seminario de TE & & & & Seminario de TE \\ \hline
+        
+        % 11:00 AM a 12:00 PM
+        \textbf{11:00 AM a 12:00 PM} & Seminario de E\&L & & Seminario de E\&L & Seminario de E\&L & \\ \hline
+        
+        % 12:00 PM a 01:00 PM
+        \textbf{12:00 PM a 01:00 PM} & & & & & \\ \hline
+        
+        % 01:00 PM a 02:00 PM
+        \textbf{01:00 PM a 02:00 PM} & & & Ofimática P. & Ofimática P. & Ofimática P. \\ \hline
+        
+        % 02:00 PM a 03:00 PM
+        \textbf{02:00 PM a 03:00 PM} & & & & & \\ \hline
+    \end{tabular}
+\end{table}
+
+\end{document}

@@ -1,0 +1,61 @@
+\documentclass[12pt]{article} 
+
+%Paquetes Basicos
+\usepackage[spanish]{babel} %identificar idiomas
+\usepackage{amsmath} % operaciones matematicas
+\usepackage{graphicx} % figuras y graficos
+
+\title{Práctica 1 en LaTeX}
+\author{Jesús Emilio Jiménez Aguilar 286666}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section*{Introducción}
+\LaTeX Es una herramienta utilizada para la elaboracion de documentos técnicos y científicos.
+En la ingenieria mecatronica se usa frecuentemente para reportes,artículos y documentación de proyectos
+
+\section{¿Por que usar \LaTeX?}
+Algunas ventajas de usar \LaTeX son:
+\begin{itemize}
+ 
+    \item Excelente manejo de ecuaciones
+    \item Documentos con formato profesional
+    \item Ideal para trabajos de ingeniería 
+
+\end{itemize}
+
+\section{Ejemplo de ecuacion}
+Una ecuacion común en mecatronica es la segunda ley de newton:
+\begin{equation}
+    F= m \cdot a
+\end{equation}
+otra ecuacion utilizada es la ley de ohm, la cual relaciona el corriente el volatje y la resistencia en uncircuito electrico: 
+
+\begin{equation}
+    V=I \cdot R
+\end{equation}
+
+\begin{equation}    
+    I = \frac{V}{R}
+\end{equation}
+
+donde $I$ es la corriente eléctrica, $V$ es elvoltaje y $R$ es la resistencia, los cuales se miden en: Amperios($A$),voltios($V$) y Ohms($\Omega$) 
+
+\section{Uso de imagenes}
+Para importar imagenes en \LaTeX el comando a utilizar tiene una estructura muy sencilla 
+
+\begin{figure}
+\centering
+\includegraphics[width=0.5\linewidth]{i1.jpg}
+\caption{IMAGEN 1}
+\label{fig:placeholder}
+\end{figure}
+
+\section{Conclusión}
+\LaTeX es una herramienta poderosa que nos ayudara a presentar nuestros trabajos de forma clara y profesional.
+
+\end{document}
+
+

@@ -1,0 +1,31 @@
+\documentclass[12pt]{article}
+\usepackage[american]{circuitikz}
+\usepackage{amsmath}
+\usepackage{geometry}
+\geometry{margin=2cm}
+
+\begin{document}
+
+
+\section{Practica 7}
+\subsection*{Circuito  en paralelo}
+\begin{circuitikz}
+    \draw
+    (0,0) to [battery, l=$12v$] (0,4)
+    \draw(0,4)--(6,4)
+    \draw(0,0)--(6,0)
+    
+    \draw(2,4) to [R, l=$2\Omega$,v=$V_1$,i=$I_1$] (2,0)
+    \draw(4,4) to [R, l=$7\Omega$,v=$V_2$,i=$I_2$] (4,0)
+    \draw (6,4) to [R, l=$4\Omega$,v=$V_3$,i= $I_3$] (6,0)
+
+    \draw [blue, -latex] (1.8,4.2) -- (0.2,4.2);
+        \draw [blue, -latex] (0.2,-0.2) -- (1.8,-0.2);
+    
+\end{circuitikz}
+
+
+
+
+
+\end{document}

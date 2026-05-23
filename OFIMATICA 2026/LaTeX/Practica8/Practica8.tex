@@ -1,0 +1,226 @@
+\documentclass{beamer}
+\usetheme{Madrid}
+\usecolortheme{whale}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usetikzlibrary{arrows, shapes.gates.logic.US, calc}
+
+% Configuración de elementos para diagramas de Op-Amps
+\tikzset{
+    opamp/.style={
+        triangle,                 
+        draw,                     
+        minimum size=2cm,         
+        regular polygon sides=3,  
+        shape border rotate=-90,  
+        thick
+    }
+}
+
+\title[Amplificadores Operacionales]{Configuraciones Básicas de Amplificadores Operacionales}
+\author{Electrónica Analógica}
+\date{\today}
+
+\begin{document}
+
+% Diapositiva 1: Portada
+\begin{frame}
+    \titlepage
+\end{frame}
+
+% Diapositiva 2: Introducción
+\begin{frame}{Introducción al Amplificador Operacional}
+    \begin{block}{¿Qué es un Op-Amp?}
+        Es un dispositivo amplificador de alta ganancia con entrada diferencial y, por lo general, una salida única. Es el bloque constructivo fundamental de la electrónica analógica.
+    \end{block}
+    \vspace{0.3cm}
+    \textbf{Características del Op-Amp Ideal:}
+    \begin{itemize}
+        \item Ganancia de lazo abierto infinita ($A_{OL} = \infty$)
+        \item Impedancia de entrada infinita ($Z_{in} = \infty$)
+        \item Impedancia de salida cero ($Z_{out} = 0$)
+        \item Ancho de banda infinito
+    \end{itemize}
+\end{frame}
+
+% Diapositiva 3: Seguidor de Voltaje
+\begin{frame}{1. Seguidor de Voltaje (Buffer)}
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+            \textbf{Ecuación:}
+            \[ V_{out} = V_{in} \]
+            \vspace{0.2cm}
+            \textbf{Características:}
+            \begin{itemize}
+                \item Ganancia de voltaje unitaria ($A_v = 1$).
+                \item Alta impedancia de entrada y baja impedancia de salida.
+                \item Se utiliza para acoplamiento de impedancias (aislar etapas).
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \begin{centering}
+            \begin{tikzpicture}[scale=0.7, transform shape]
+                \draw (0,0) node[opamp] (opamp) {};
+                \draw (opamp.corner 3) node[left, yshift=0.4cm] {$+$} node[left, yshift=-0.4cm] {$-$};
+                \draw (opamp.corner 3) ++(-1.5,0.4) node[left] {$V_{in}$} -- ++(1,0) -- +(0.5,0);
+                \draw (opamp.corner 1) -- ++(1,0) node[right] {$V_{out}$} coordinate (out);
+                \draw (opamp.corner 3) ++(0,-0.4) -- ++(0,-0.8) coordinate (fb) -- ($(out)+(0,-1.2)$) -- (out);
+            \end{tikzpicture}
+            \end{centering}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% Diapositiva 4: Amplificador Inversor
+\begin{frame}{2. Amplificador Inversor}
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+            \textbf{Ecuación:}
+            \[ V_{out} = -\left(\frac{R_f}{R_{in}}\right) V_{in} \]
+            \vspace{0.2cm}
+            \textbf{Características:}
+            \begin{itemize}
+                \item La salida está desfasada $180^\circ$ respecto a la entrada.
+                \item El pin no inversor ($+$) está conectado a tierra (Tierra Virtual en pin $-$).
+                \item La ganancia puede ser menor, igual o mayor a 1.
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \begin{centering}
+            \begin{tikzpicture}[scale=0.7, transform shape]
+                \draw (0,0) node[opamp] (opamp) {};
+                \draw (opamp.corner 3) node[left, yshift=0.4cm] {$+$} node[left, yshift=-0.4cm] {$-$};
+                % Entrada inversora
+                \draw (opamp.corner 3) ++(0,-0.4) -- ++(-0.5,0) to[R, l=$R_{in}$] ++(-1.5,0) node[left] {$V_{in}$};
+                % Lazo de realimentacion
+                \draw (opamp.corner 3) ++(-0.2,-0.4) coordinate (node1) -- ++(0,1.2) to[R, l=$R_f$] ++(1.8,0) -- ++(0,-1.2) coordinate (node2);
+                \draw (opamp.corner 1) -- (node2) -- ++(0.5,0) node[right] {$V_{out}$};
+                % Entrada no inversora a tierra
+                \draw (opamp.corner 3) ++(0,0.4) -- ++(-0.5,0) -- ++(0,-0.3) node[ground] {};
+                \draw (-0.5,0.1) -- ++(0,-0.2) -- ++(-0.2,0) ++(0.4,0) -- ++(-0.4,0); % Simbolo tierra simple
+            \end{tikzpicture}
+            \end{centering}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% Diapositiva 5: Amplificador No Inversor
+\begin{frame}{3. Amplificador No Inversor}
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+            \textbf{Ecuación:}
+            \[ V_{out} = \left(1 + \frac{R_f}{R_1}\right) V_{in} \]
+            \vspace{0.2cm}
+            \textbf{Características:}
+            \begin{itemize}
+                \item La salida está en fase con la señal de entrada.
+                \item La ganancia de voltaje siempre es mayor o igual a 1.
+                \item Ofrece una impedancia de entrada extremadamente alta.
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \begin{centering}
+            \begin{tikzpicture}[scale=0.7, transform shape]
+                \draw (0,0) node[opamp] (opamp) {};
+                \draw (opamp.corner 3) node[left, yshift=0.4cm] {$+$} node[left, yshift=-0.4cm] {$-$};
+                % Entrada no inversora
+                \draw (opamp.corner 3) ++(-0.5,0.4) node[left] {$V_{in}$} -- ++(0.5,0);
+                % Realimentacion
+                \draw (opamp.corner 3) ++(-0.2,-0.4) coordinate (n1) -- ++(0,-1.2) to[R, l=$R_f$] ++(1.8,0) -- ++(0,1.2) coordinate (n2);
+                \draw (opamp.corner 1) -- ++(1,0) node[right] {$V_{out}$};
+                % R1 a tierra
+                \draw (opamp.corner 3) ++(-0.2,-0.4) -- ++(-1,0) to[R, l=$R_1$] ++(-1,0) -- ++(0,-0.3);
+                \draw (-2.4,-0.7) -- ++(0,-0.2) -- ++(-0.2,0) ++(0.4,0); % Tierra
+            \end{tikzpicture}
+            \end{centering}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% Diapositiva 6: Amplificador Sumador
+\begin{frame}{4. Amplificador Sumador Inversor}
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+            \textbf{Ecuación:}
+            \[ V_{out} = -R_f \left( \frac{V_1}{R_1} + \frac{V_2}{R_2} \right) \]
+            \vspace{0.2cm}
+            \textbf{Si $R_1 = R_2 = R_f$:}
+            \[ V_{out} = -(V_1 + V_2) \]
+            \textbf{Características:}
+            \begin{itemize}
+                \item Suma algebraicamente múltiples señales de entrada.
+                \item Cada entrada puede escalarse de forma independiente variando sus resistencias.
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \begin{centering}
+            \begin{tikzpicture}[scale=0.6, transform shape]
+                \draw (0,0) node[opamp] (opamp) {};
+                \draw (opamp.corner 3) node[left, yshift=0.4cm] {$+$} node[left, yshift=-0.4cm] {$-$};
+                % Entradas
+                \draw (opamp.corner 3) ++(-0.5,-0.4) coordinate (inM);
+                \draw (inM) -- ++(-0.5,0) coordinate (fork);
+                \draw (fork) -- ++(0,0.6) to[R, l=$R_1$] ++(-1.5,0) node[left] {$V_1$};
+                \draw (fork) -- ++(0,-0.6) to[R, l=$R_2$] ++(-1.5,0) node[left] {$V_2$};
+                % Realimentacion
+                \draw (inM) ++(0.2,0) -- ++(0,1.5) to[R, l=$R_f$] ++(1.8,0) -- ++(0,-1.5);
+                \draw (opamp.corner 1) -- ++(0.5,0) node[right] {$V_{out}$};
+                % No inversora a tierra
+                \draw (opamp.corner 3) ++(0,0.4) -- ++(-0.5,0) -- ++(0,-0.3);
+            \end{tikzpicture}
+            \end{centering}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% Diapositiva 7: Amplificador Diferencial
+\begin{frame}{5. Amplificador Diferencial (Restador)}
+    \begin{block}{Ecuación General}
+        Si $R_1 = R_3$ y $R_2 = R_f$:
+        \[ V_{out} = \frac{R_2}{R_1} (V_2 - V_1) \]
+    \end{block}
+    \vspace{0.2cm}
+    \textbf{Aplicaciones principales:}
+    \begin{itemize}
+        \item Amplifica únicamente la \textbf{diferencia} entre dos señales de entrada.
+        \item Rechaza el ruido común presente en ambas líneas (Alto CMRR - Relación de Rechazo de Modo Común).
+        \item Es la base de los amplificadores de instrumentación.
+    \end{itemize}
+\end{frame}
+
+% Diapositiva 8: Integrador y Derivador
+\begin{frame}{6. Configuraciones con Capacitores}
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+            \begin{block}{Amplificador Integrador}
+                Sustituye $R_f$ por un capacitor $C$.
+                \[ V_{out} = -\frac{1}{R \cdot C} \int V_{in} \, dt \]
+                Utilizado para generar rampas de voltaje y en filtros.
+            \end{block}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \begin{block}{Amplificador Derivador}
+                Sustituye $R_{in}$ por un capacitor $C$.
+                \[ V_{out} = -R \cdot C \frac{dV_{in}}{dt} \]
+                La salida es proporcional a la razón de cambio de la entrada.
+            \end{block}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% Diapositiva 9: Conclusión
+\begin{frame}{Resumen y Conclusiones}
+    \begin{itemize}
+        \item \textbf{Flexibilidad:} Cambiando los componentes de la red de realimentación externa ($R$ y $C$) se define por completo la función del circuito.
+        \item \textbf{Realimentación Negativa:} Es la clave en todas estas configuraciones para estabilizar la ganancia y controlar el circuito de forma lineal.
+        \item \textbf{Criterio de Selección:} La elección de la configuración depende de si necesitamos invertir la señal, sumar canales, aislar etapas o realizar operaciones matemáticas complejas.
+    \end{itemize}
+    \vspace{0.5cm}
+    \centering
+    \color{blue}\Large ¡Gracias por su atención!
+\end{frame}
+
+\end{document}
